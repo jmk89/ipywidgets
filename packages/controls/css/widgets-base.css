@@ -17,7 +17,7 @@
   --jp-widgets-readout-color: var(--jp-widgets-color);
   --jp-widgets-font-size: var(--jp-ui-font-size1);
   --jp-widgets-margin: 2px;
-  --jp-widgets-inline-height: 28px;
+  --jp-widgets-inline-height: 48px;
   --jp-widgets-inline-width: 300px;
   --jp-widgets-inline-width-short: calc(
     var(--jp-widgets-inline-width) / 2 - var(--jp-widgets-margin)
@@ -685,7 +685,7 @@
   /* Override the align-items baseline. This way, the description and readout
     still seem to align their baseline properly, and we don't have to have
     align-self: stretch in the .slider-container. */
-  align-items: center;
+  align-items: flex-start;
 }
 
 /* <DEPRECATED> */
@@ -702,6 +702,10 @@
       var(--jp-widgets-slider-border-width)
   );
   margin-right: calc(
+    var(--jp-widgets-slider-handle-size) / 2 - 2 *
+      var(--jp-widgets-slider-border-width)
+  );
+  margin-top: calc(
     var(--jp-widgets-slider-handle-size) / 2 - 2 *
       var(--jp-widgets-slider-border-width)
   );

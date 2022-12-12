@@ -11,7 +11,7 @@ import { uuid } from './utils';
 
 import { format } from 'd3-format';
 
-import noUiSlider from 'nouislider';
+import noUiSlider, { PipsMode } from 'nouislider';
 
 export class IntModel extends CoreDescriptionModel {
   defaults(): Backbone.ObjectHash {
@@ -62,6 +62,7 @@ export class IntSliderModel extends BoundedIntModel {
       continuous_update: true,
       style: null,
       disabled: false,
+      minMaxDisplay: false,
     };
   }
   initialize(
@@ -204,6 +205,9 @@ export abstract class BaseIntSliderView extends DescriptionView {
   createSlider(): void {
     const orientation = this.model.get('orientation');
     const behavior = this.model.get('behavior');
+    const minMaxDisplay = this.model.get('minMaxDisplay');
+
+    console.log(`minMaxDisplay: ${minMaxDisplay}`);
 
     noUiSlider.create(this.$slider, {
       start: this.model.get('value'),
@@ -213,6 +217,11 @@ export abstract class BaseIntSliderView extends DescriptionView {
         min: this.model.get('min'),
         max: this.model.get('max'),
       },
+      pips: minMaxDisplay ? {
+        mode: PipsMode.Values, 
+        values: [this.model.get('min'), this.model.get('max')],
+        density: 100
+      } : undefined,
       step: this.model.get('step'),
       animate: false,
       orientation: orientation,
@@ -417,6 +426,7 @@ export class IntSliderView extends BaseIntSliderView {
     const min = this.model.get('min');
     const max = this.model.get('max');
     let value = this.model.get('value');
+    console.log('in slider');
 
     if (value > max) {
       value = max;

@@ -170,6 +170,7 @@ class IntSlider(_BoundedInt):
     style = InstanceDict(SliderStyle).tag(sync=True, **widget_serialization)
     behavior = CaselessStrEnum(values=['drag-tap', 'drag-snap', 'tap', 'drag', 'snap'],
         default_value='drag-tap', help="Slider dragging behavior.").tag(sync=True)
+    minMaxDisplay = Bool(True, help="Displays the minimum and maximum values as pips").tag(sync=True)
 
 
 @register
